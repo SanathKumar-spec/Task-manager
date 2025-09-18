@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
-  "https://68cc1aa37f72106deac7a7dc--kaleidoscopic-clafoutis-640523.netlify.app  ",
+  "https://68cc1aa37f72106deac7a7dc--kaleidoscopic-clafoutis-640523.netlify.app",
   "http://localhost:5173"
 ];
 
