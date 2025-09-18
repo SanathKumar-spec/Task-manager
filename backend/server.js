@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://68cc14a15315c9403560bb73--kaleidoscopic-clafoutis-640523.netlify.app/",
+  origin: "https://68cc14a15315c9403560bb73--kaleidoscopic-clafoutis-640523.netlify.app",
   credentials: true
 }));
 
