@@ -16,9 +16,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://task-manager-lqve6a6k3-sanath-kumars-projects-02eccfe3.vercel.app",
+  origin: "https://task-manager-rose-phi.vercel.app",
   credentials: true
 }));
+
 
 
 mongoose.connect(process.env.MONGO_URI)
