@@ -17,6 +17,7 @@ export default function Otp({ onVerified }) {
 
   const inputsRef = useRef([]);
 
+
   useEffect(() => {
     if (resendCooldown <= 0) return;
     const timer = setInterval(() => setResendCooldown(prev => prev - 1), 1000);
@@ -24,14 +25,16 @@ export default function Otp({ onVerified }) {
   }, [resendCooldown]);
 
   const handleSubmit = async () => {
+    setMessage("")
+    setError("")
     if (!email) return alert("Email not found. Go back and try again.");
 
     const enteredOtp = otp.join("");
     try {
-      const res = await fetch("http://localhost:5000/verify-otp", {
+      const res = await fetch(`${getBaseURL()}/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-         credentials: "include",
+        credentials: "include",
         body: JSON.stringify({ email, otp: enteredOtp }),
       });
 
@@ -52,7 +55,7 @@ export default function Otp({ onVerified }) {
     if (resendCooldown > 0 || isBlocked) return;
 
     try {
-      const res = await fetch("http://localhost:5000/resend-otp", {
+      const res = await fetch(`${getBaseURL()}/resend-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -62,7 +65,7 @@ export default function Otp({ onVerified }) {
 
       if (res.ok) {
         setMessage("OTP resent successfully!");
-        setResendCooldown(10); 
+        setResendCooldown(10);
         setResendCount(data.resendCount);
       } else {
         alert(data.error);
@@ -77,7 +80,7 @@ export default function Otp({ onVerified }) {
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="shadow-2xl px-10 py-8 flex flex-col items-center justify-center gap-5 rounded-lg max-w-[350px] md:max-w-[400px]">
-      <h1 className="text-xl md:text-2xl font-bold mb-0">Verify Your Email</h1>
+        <h1 className="text-xl md:text-2xl font-bold mb-0">Verify Your Email</h1>
         <p className="text-center text-sm md:text-md -mt-3">Enter the 4-digit code sent to your email address</p>
 
         <div className="w-fit gap-4 flex">
@@ -112,19 +115,18 @@ export default function Otp({ onVerified }) {
         </button>
         {message && <p className="text-green-500 text-sm -m-3">{message}</p>}
         {error && <p className="text-red-500 text-sm -m-3">{error}</p>}
-          <p className="m-0 text-sm md:text-md">Didn't recieve the code?</p>
+        <p className="m-0 text-sm md:text-md">Didn't recieve the code?</p>
         <button
           onClick={handleResend}
           disabled={resendCooldown > 0 || isBlocked}
-          className={`px-3 py-1 rounded-lg text-blue-600 cursor-pointer -mt-4 text-sm md:text-lg ${
-            resendCooldown > 0 || isBlocked ? " cursor-not-allowed" : ""
-          }`}
+          className={`px-3 py-1 rounded-lg text-blue-600 cursor-pointer -mt-4 text-sm md:text-lg ${resendCooldown > 0 || isBlocked ? " cursor-not-allowed" : ""
+            }`}
         >
           {isBlocked
             ? "OTP blocked for 1 hour"
             : resendCooldown > 0
-            ? `Resend OTP in ${resendCooldown}s`
-            : "Resend OTP"}
+              ? `Resend OTP in ${resendCooldown}s`
+              : "Resend OTP"}
         </button>
 
       </div>

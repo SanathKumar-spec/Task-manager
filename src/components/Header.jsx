@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaUserCircle } from "react-icons/fa";
+import { getBaseURL } from "../../utils/api";
 
 export default function Header() {
     const [user, setUser] = useState("")
@@ -7,7 +8,7 @@ export default function Header() {
     useEffect(() =>{
         const fetchUser = async () =>{
             try{
-                const res = await fetch("http://localhost:5000/userInfo", {
+                const res = await fetch(`${getBaseURL()}/userInfo`, {
                     method: 'GET',
                     credentials: 'include'
                 })

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
-import { FaWindows } from "react-icons/fa";
+import { getBaseURL } from '../../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
@@ -21,7 +21,7 @@ export default function Login() {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch(`${getBaseURL()}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -15,7 +15,11 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: "https://task-manager-fjgx6s62q-sanath-kumars-projects-02eccfe3.vercel.app",
+  credentials: true
+}));
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
@@ -106,8 +110,8 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict"
+      secure: true,
+      sameSite: "none"
     });
 
     res.status(200).json({ message: "Login successful" });
@@ -150,8 +154,8 @@ app.post("/verify-otp", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     });
 

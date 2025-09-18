@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getBaseURL } from "../../utils/api";
 
 export default function UserName() {
   const [username, setUsername] = useState("");
@@ -32,7 +33,7 @@ export default function UserName() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/username", {
+      const res = await fetch(`${getBaseURL()}/username`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
