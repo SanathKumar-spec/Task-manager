@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://task-manager-fjgx6s62q-sanath-kumars-projects-02eccfe3.vercel.app",
+  origin: "https://task-manager-lqve6a6k3-sanath-kumars-projects-02eccfe3.vercel.app",
   credentials: true
 }));
 
