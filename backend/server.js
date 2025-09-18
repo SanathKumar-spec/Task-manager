@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: "https://task-manager-hv7auqfp0-sanath-kumars-projects-02eccfe3.vercel.app",
+  "https://68cc14a15315c9403560bb73--kaleidoscopic-clafoutis-640523.netlify.app/",
   credentials: true
 }));
 
