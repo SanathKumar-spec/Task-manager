@@ -16,14 +16,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
-  "https://68cc1aa37f72106deac7a7dc--kaleidoscopic-clafoutis-640523.netlify.app",
+  "https://sanath-task-manager-app.netlify.app",
   "http://localhost:5173"
 ];
 
 app.use(cors({
-  origin: function(origin, callback){
-    if(!origin) return callback(null, true); // allow non-browser requests like Postman
-    if(allowedOrigins.indexOf(origin) === -1){
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
       const msg = `CORS policy does not allow access from this origin.`;
       return callback(new Error(msg), false);
     }
